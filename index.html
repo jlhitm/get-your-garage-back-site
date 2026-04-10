@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Your Garage Back — Flat-Rate Garage Cleanouts in One Day</title>
+    <meta name="description" content="One-day garage cleanouts. Sort, haul, clean the floor. Flat price. Spotless by dinner or you don't pay. South Austin area.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://getyourgarageback.co/">
+
+    <!-- Meta Pixel Code (PLACEHOLDER — wire real GYGB Pixel ID in Phase 2b) -->
+    <!--
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', 'GYGB_PIXEL_ID_PLACEHOLDER');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=GYGB_PIXEL_ID_PLACEHOLDER&ev=PageView&noscript=1"/></noscript>
+    -->
+    <!-- End Meta Pixel Code -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green: #2d6a4f;
+            --green-dark: #1b4332;
+            --gold: #d4a843;
+            --gold-bright: #ffd24a;
+            --dark: #1a1a1a;
+            --gray-900: #212529;
+            --gray-700: #495057;
+            --gray-300: #ced4da;
+            --gray-100: #f8f9fa;
+            --white: #ffffff;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--gray-900);
+            line-height: 1.55;
+            -webkit-font-smoothing: antialiased;
+            background: var(--gray-100);
+        }
+
+        /* Attention bar */
+        .attention-bar {
+            background: var(--gold-bright);
+            color: var(--dark);
+            text-align: center;
+            padding: 0.75rem 1rem;
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 0.01em;
+        }
+
+        /* Hero */
+        .hero {
+            background: var(--white);
+            padding: 2rem 1.25rem 1.5rem;
+            text-align: center;
+            max-width: 760px;
+            margin: 0 auto;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 0.9rem;
+            letter-spacing: -0.02em;
+            color: var(--green-dark);
+        }
+        .hero .subhead {
+            font-size: 1.1rem;
+            color: var(--gray-700);
+            max-width: 560px;
+            margin: 0 auto 1.25rem;
+        }
+        .hero img {
+            width: 100%;
+            max-width: 620px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            margin-top: 0.5rem;
+        }
+
+        /* Form section */
+        .form-section {
+            background: var(--gray-100);
+            padding: 1.75rem 1.25rem 2.5rem;
+        }
+        .form-card {
+            max-width: 640px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 14px;
+            padding: 1.75rem 1.5rem;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+        }
+        .form-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .form-header h2 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--green-dark);
+            margin-bottom: 0.35rem;
+        }
+        .form-header p {
+            font-size: 0.95rem;
+            color: var(--gray-700);
+        }
+
+        .step { display: none; }
+        .step.active { display: block; }
+
+        .question {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.9rem;
+            color: var(--gray-900);
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            margin-bottom: 1.25rem;
+        }
+        .option {
+            display: block;
+            padding: 0.9rem 1rem;
+            border: 2px solid var(--gray-300);
+            border-radius: 10px;
+            background: var(--white);
+            font-size: 0.98rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.15s;
+            text-align: left;
+            color: var(--gray-900);
+        }
+        .option:hover { border-color: var(--green); background: #f0f7f3; }
+        .option.selected { border-color: var(--green); background: #e8f4ee; font-weight: 600; }
+
+        .text-input {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            border: 2px solid var(--gray-300);
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: inherit;
+            margin-bottom: 0.9rem;
+            color: var(--gray-900);
+        }
+        .text-input:focus {
+            outline: none;
+            border-color: var(--green);
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 1rem 1.25rem;
+            background: var(--green);
+            color: var(--white);
+            border: none;
+            border-radius: 10px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.15s;
+            font-family: inherit;
+        }
+        .btn:hover { background: var(--green-dark); }
+        .btn:disabled { background: var(--gray-300); cursor: not-allowed; }
+
+        .btn-secondary {
+            background: var(--white);
+            color: var(--gray-700);
+            border: 2px solid var(--gray-300);
+            margin-top: 0.6rem;
+        }
+        .btn-secondary:hover { background: var(--gray-100); color: var(--gray-900); }
+
+        .progress {
+            display: flex;
+            gap: 0.35rem;
+            margin-bottom: 1.25rem;
+        }
+        .progress-dot {
+            flex: 1;
+            height: 5px;
+            background: var(--gray-300);
+            border-radius: 3px;
+            transition: background 0.2s;
+        }
+        .progress-dot.done { background: var(--green); }
+
+        /* Success state */
+        .success {
+            text-align: center;
+            padding: 1rem 0;
+        }
+        .success h2 {
+            color: var(--green-dark);
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        .success p {
+            color: var(--gray-700);
+            font-size: 1rem;
+            margin-bottom: 1.25rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 1.5rem 1rem 2rem;
+            font-size: 0.8rem;
+            color: var(--gray-700);
+            max-width: 640px;
+            margin: 0 auto;
+        }
+        footer a { color: var(--green); text-decoration: none; }
+
+        @media (min-width: 640px) {
+            .hero { padding: 3rem 1.5rem 2rem; }
+            .hero h1 { font-size: 2.8rem; }
+            .form-card { padding: 2.25rem 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="attention-bar" id="attention-bar">
+        ATTENTION: South Austin Homeowners
+    </div>
+
+    <section class="hero">
+        <h1>Get Your Garage Back in One Day</h1>
+        <p class="subhead">Flat-rate. Sort, haul, clean the floor. Spotless garage by dinner. Or you don't pay.</p>
+        <img src="garage-transformation-before-after.png" alt="Before and after garage cleanout transformation" loading="eager">
+    </section>
+
+    <section class="form-section">
+        <div class="form-card">
+            <div class="form-header">
+                <h2>Fill out this short form (60 seconds) and get your flat quote today</h2>
+                <p>Answer 3 questions. We text you a price within 15 minutes. No sales calls.</p>
+            </div>
+
+            <div class="progress" id="progress">
+                <div class="progress-dot done"></div>
+                <div class="progress-dot"></div>
+                <div class="progress-dot"></div>
+                <div class="progress-dot"></div>
+                <div class="progress-dot"></div>
+            </div>
+
+            <form id="quote-form" novalidate>
+
+                <div class="step active" data-step="1">
+                    <div class="question">What do you need done?</div>
+                    <div class="options" data-field="garage_type">
+                        <button type="button" class="option" data-value="2-car cleanout">Full 2-car garage cleanout</button>
+                        <button type="button" class="option" data-value="3-car cleanout">Full 3-car garage cleanout</button>
+                        <button type="button" class="option" data-value="cleanout + shelving">Cleanout plus shelving install</button>
+                        <button type="button" class="option" data-value="cleanout + transformation">Cleanout plus full transformation</button>
+                        <button type="button" class="option" data-value="other">Something else</button>
+                    </div>
+                </div>
+
+                <div class="step" data-step="2">
+                    <div class="question">How would you describe your garage right now?</div>
+                    <div class="options" data-field="garage_state">
+                        <button type="button" class="option" data-value="mostly junk">Mostly junk and trash</button>
+                        <button type="button" class="option" data-value="mix">Mix of keep and toss</button>
+                        <button type="button" class="option" data-value="organizing">Needs organizing, not much junk</button>
+                        <button type="button" class="option" data-value="packed">Packed floor to ceiling</button>
+                    </div>
+                </div>
+
+                <div class="step" data-step="3">
+                    <div class="question">When do you want this done?</div>
+                    <div class="options" data-field="timeline">
+                        <button type="button" class="option" data-value="this week">This week</button>
+                        <button type="button" class="option" data-value="next 2 weeks">Next 2 weeks</button>
+                        <button type="button" class="option" data-value="this month">This month</button>
+                        <button type="button" class="option" data-value="just pricing">Just getting a price</button>
+                    </div>
+                </div>
+
+                <div class="step" data-step="4">
+                    <div class="question">What's your zip code?</div>
+                    <input type="text" class="text-input" id="zip" name="zip" placeholder="e.g. 78739" inputmode="numeric" maxlength="5" autocomplete="postal-code">
+                    <button type="button" class="btn" id="zip-next">Continue</button>
+                </div>
+
+                <div class="step" data-step="5">
+                    <div class="question">Where should we text your quote?</div>
+                    <input type="text" class="text-input" id="first_name" name="first_name" placeholder="First name" autocomplete="given-name">
+                    <input type="tel" class="text-input" id="phone" name="phone" placeholder="Phone number" autocomplete="tel">
+                    <input type="email" class="text-input" id="email" name="email" placeholder="Email" autocomplete="email">
+                    <button type="submit" class="btn" id="submit-btn">Get My Flat Quote</button>
+                </div>
+
+                <div class="step" data-step="success">
+                    <div class="success">
+                        <h2>Got it! Check your phone in a few minutes.</h2>
+                        <p>We'll text you a flat quote shortly. Want to speed it up? Text us 2-3 photos of your garage and we'll confirm your exact price faster.</p>
+                        <a href="sms:+1QUOPLACEHOLDER" class="btn">Text Us Photos Now</a>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>Get Your Garage Back &middot; Serving Buda, Kyle, Circle C, Belterra, Dripping Springs &amp; South Austin</p>
+        <p style="margin-top:0.5rem;">&copy; 2026 Get Your Garage Back. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // ------- State -------
+        const formState = {
+            garage_type: '',
+            garage_state: '',
+            timeline: '',
+            zip: '',
+            first_name: '',
+            phone: '',
+            email: '',
+            utm_source: '',
+            utm_campaign: '',
+            utm_content: ''
+        };
+
+        // Capture UTM params
+        const urlParams = new URLSearchParams(window.location.search);
+        formState.utm_source = urlParams.get('utm_source') || '';
+        formState.utm_campaign = urlParams.get('utm_campaign') || '';
+        formState.utm_content = urlParams.get('utm_content') || '';
+
+        // Rotate attention bar based on utm_content (neighborhood)
+        const neighborhoodMap = {
+            'circle-c': 'Circle C Ranch',
+            'legend-oaks': 'Legend Oaks',
+            'belterra': 'Belterra',
+            'meridian': 'Meridian',
+            'shady-hollow': 'Shady Hollow',
+            'travis-country': 'Travis Country'
+        };
+        for (const key in neighborhoodMap) {
+            if (formState.utm_content && formState.utm_content.indexOf(key) !== -1) {
+                document.getElementById('attention-bar').textContent = 'ATTENTION: ' + neighborhoodMap[key] + ' Homeowners';
+                break;
+            }
+        }
+
+        // ------- Step navigation -------
+        let currentStep = 1;
+        const totalSteps = 5;
+
+        function goToStep(step) {
+            document.querySelectorAll('.step').forEach(function(el) { el.classList.remove('active'); });
+            const target = document.querySelector('[data-step="' + step + '"]');
+            if (target) target.classList.add('active');
+            currentStep = step;
+            updateProgress();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function updateProgress() {
+            const dots = document.querySelectorAll('.progress-dot');
+            dots.forEach(function(dot, i) {
+                if (typeof currentStep === 'number' && i < currentStep) {
+                    dot.classList.add('done');
+                } else if (currentStep === 'success') {
+                    dot.classList.add('done');
+                } else {
+                    dot.classList.remove('done');
+                }
+            });
+        }
+
+        // ------- Option click handlers -------
+        document.querySelectorAll('.options').forEach(function(optionGroup) {
+            optionGroup.addEventListener('click', function(e) {
+                const btn = e.target.closest('.option');
+                if (!btn) return;
+                const field = optionGroup.getAttribute('data-field');
+                const value = btn.getAttribute('data-value');
+                formState[field] = value;
+                optionGroup.querySelectorAll('.option').forEach(function(o) { o.classList.remove('selected'); });
+                btn.classList.add('selected');
+
+                // Auto-advance
+                setTimeout(function() { goToStep(currentStep + 1); }, 180);
+            });
+        });
+
+        // ------- Zip step -------
+        document.getElementById('zip-next').addEventListener('click', function() {
+            const zip = document.getElementById('zip').value.trim();
+            if (!/^\d{5}$/.test(zip)) {
+                document.getElementById('zip').focus();
+                document.getElementById('zip').style.borderColor = '#c92a2a';
+                return;
+            }
+            formState.zip = zip;
+            goToStep(5);
+        });
+
+        // ------- Submit handler -------
+        document.getElementById('quote-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            formState.first_name = document.getElementById('first_name').value.trim();
+            formState.phone = document.getElementById('phone').value.trim();
+            formState.email = document.getElementById('email').value.trim();
+
+            if (!formState.first_name || !formState.phone) {
+                alert('Please fill in your name and phone number.');
+                return;
+            }
+
+            const submitBtn = document.getElementById('submit-btn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+
+            // Post to n8n webhook (PLACEHOLDER URL — wire in Phase 2b)
+            const webhookUrl = 'https://n8n.placeholder.local/webhook/gygb-lead';
+
+            try {
+                await fetch(webhookUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(Object.assign({}, formState, {
+                        submitted_at: new Date().toISOString(),
+                        source: 'landing_page',
+                        page_url: window.location.href
+                    }))
+                });
+            } catch (err) {
+                // Swallow errors — we still want to show success and capture lead server-side via alt path
+                console.warn('Webhook post failed:', err);
+            }
+
+            // Fire Meta Pixel Lead event (will activate when pixel is wired)
+            if (typeof fbq === 'function') {
+                fbq('track', 'Lead');
+            }
+
+            currentStep = 'success';
+            goToStep('success');
+        });
+    </script>
+</body>
+</html>
