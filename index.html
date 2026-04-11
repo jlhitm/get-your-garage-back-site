@@ -436,8 +436,8 @@
             submitBtn.disabled = true;
             submitBtn.textContent = 'Sending...';
 
-            // Post to n8n webhook (PLACEHOLDER URL — wire in Phase 2b)
-            const webhookUrl = 'https://n8n.placeholder.local/webhook/gygb-lead';
+            // n8n webhook on Railway (wired Phase 2b 2026-04-11)
+            const webhookUrl = 'https://primary-production-b50a.up.railway.app/webhook/gygb-lead';
 
             try {
                 await fetch(webhookUrl, {
