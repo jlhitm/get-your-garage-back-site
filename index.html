@@ -271,8 +271,7 @@
                     <div class="options" data-field="garage_type">
                         <button type="button" class="option" data-value="2-car cleanout">Full 2-car garage cleanout</button>
                         <button type="button" class="option" data-value="3-car cleanout">Full 3-car garage cleanout</button>
-                        <button type="button" class="option" data-value="cleanout + shelving">Cleanout plus shelving install</button>
-                        <button type="button" class="option" data-value="cleanout + transformation">Cleanout plus full transformation</button>
+                        <button type="button" class="option" data-value="larger cleanout">Larger garage (4+ cars or oversized)</button>
                         <button type="button" class="option" data-value="other">Something else</button>
                     </div>
                 </div>
@@ -375,7 +374,13 @@
             if (target) target.classList.add('active');
             currentStep = step;
             updateProgress();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            // Scroll the form card to the top of the viewport so the next
+            // question is immediately visible — do NOT scroll to page top
+            // (was causing "have to scroll back down" UX on mobile).
+            const formCard = document.querySelector('.form-card');
+            if (formCard) {
+                formCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
         }
 
         function updateProgress() {
