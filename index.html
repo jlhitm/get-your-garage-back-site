@@ -443,13 +443,42 @@
             font-size: 1rem;
             margin-bottom: 1.25rem;
         }
-        .sms-consent {
-            font-size: 0.75rem;
-            color: var(--gray-700);
-            line-height: 1.5;
+        .sms-consent-wrapper {
             margin-bottom: 0.9rem;
         }
-        .sms-consent a { color: var(--green); text-decoration: underline; }
+        .sms-consent-label {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            cursor: pointer;
+            padding: 0.75rem;
+            border: 2px solid var(--gray-300);
+            border-radius: 10px;
+            transition: border-color 0.15s;
+        }
+        .sms-consent-label:hover { border-color: var(--green); }
+        .sms-consent-label.checked { border-color: var(--green); background: #f0f7f3; }
+        .sms-consent-checkbox {
+            width: 20px;
+            height: 20px;
+            min-width: 20px;
+            margin-top: 2px;
+            accent-color: var(--green);
+            cursor: pointer;
+        }
+        .sms-consent-text {
+            font-size: 0.82rem;
+            color: var(--gray-700);
+            line-height: 1.55;
+        }
+        .sms-consent-text a { color: var(--green); text-decoration: underline; }
+        .sms-consent-note {
+            font-size: 0.75rem;
+            color: var(--gray-700);
+            margin-top: 0.4rem;
+            text-align: center;
+            line-height: 1.5;
+        }
 
         @media (min-width: 640px) {
             .form-card { padding: 2.25rem 2rem; }
@@ -937,11 +966,17 @@
                 </div>
 
                 <div class="step" data-step="5">
-                    <div class="question">Where should we text your quote?</div>
+                    <div class="question">Where should we send your quote?</div>
                     <input type="text" class="text-input" id="first_name" name="first_name" placeholder="First name" autocomplete="given-name">
                     <input type="tel" class="text-input" id="phone" name="phone" placeholder="Phone number" autocomplete="tel">
-                    <input type="email" class="text-input" id="email" name="email" placeholder="Email" autocomplete="email">
-                    <p class="sms-consent">By providing your phone number, you agree to receive text messages from Get Your Garage Back LLC. Message frequency varies. Msg &amp; data rates may apply. Reply STOP to opt out, HELP for help. <a href="/privacy.html">Privacy Policy</a> &amp; <a href="/terms-of-service.html">Terms of Service</a>.</p>
+                    <input type="email" class="text-input" id="email" name="email" placeholder="Email (optional)" autocomplete="email">
+                    <div class="sms-consent-wrapper">
+                        <label class="sms-consent-label" id="sms-consent-label">
+                            <input type="checkbox" class="sms-consent-checkbox" id="sms_consent" name="sms_consent">
+                            <span class="sms-consent-text">I agree to receive text messages from Get Your Garage Back LLC about my quote and service updates. Message frequency varies. Msg &amp; data rates may apply. Reply STOP to unsubscribe, HELP for help. <a href="/privacy.html">Privacy Policy</a> &amp; <a href="/terms-of-service.html">Terms of Service</a>.</span>
+                        </label>
+                        <p class="sms-consent-note">Consent is not required to receive a quote. You can also call us at <a href="tel:+15128773275">(512) 877-3275</a>.</p>
+                    </div>
                     <button type="submit" class="btn" id="submit-btn">Get My Flat Quote</button>
                 </div>
 
@@ -1252,6 +1287,7 @@
             first_name: '',
             phone: '',
             email: '',
+            sms_consent: false,
             utm_source: '',
             utm_campaign: '',
             utm_content: ''
@@ -1341,6 +1377,7 @@
             formState.first_name = document.getElementById('first_name').value.trim();
             formState.phone = document.getElementById('phone').value.trim();
             formState.email = document.getElementById('email').value.trim();
+            formState.sms_consent = document.getElementById('sms_consent').checked;
 
             if (!formState.first_name || !formState.phone) {
                 alert('Please fill in your name and phone number.');
@@ -1354,18 +1391,32 @@
             // n8n webhook on Railway
             var webhookUrl = 'https://primary-production-b50a.up.railway.app/webhook/gygb-lead';
 
+            var payload = Object.assign({}, formState, {
+                submitted_at: new Date().toISOString(),
+                source: 'landing_page',
+                page_url: window.location.href
+            });
+
+            // n8n webhook
             try {
                 await fetch(webhookUrl, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(Object.assign({}, formState, {
-                        submitted_at: new Date().toISOString(),
-                        source: 'landing_page',
-                        page_url: window.location.href
-                    }))
+                    body: JSON.stringify(payload)
                 });
             } catch (err) {
                 console.warn('Webhook post failed:', err);
+            }
+
+            // Formspree email capture
+            try {
+                await fetch('https://formspree.io/f/xlgvjzrv', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+            } catch (err) {
+                console.warn('Formspree post failed:', err);
             }
 
             // Fire Meta Pixel Lead event
@@ -1398,6 +1449,19 @@
                 document.getElementById('nav-links').classList.remove('nav-open');
             });
         });
+
+        // ======= SMS CONSENT CHECKBOX VISUAL =======
+        var smsCheckbox = document.getElementById('sms_consent');
+        var smsLabel = document.getElementById('sms-consent-label');
+        if (smsCheckbox && smsLabel) {
+            smsCheckbox.addEventListener('change', function() {
+                if (smsCheckbox.checked) {
+                    smsLabel.classList.add('checked');
+                } else {
+                    smsLabel.classList.remove('checked');
+                }
+            });
+        }
 
         // ======= FAQ ACCORDION =======
         document.querySelectorAll('.faq-question').forEach(function(btn) {
