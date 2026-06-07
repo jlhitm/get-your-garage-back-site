@@ -915,67 +915,31 @@
     <section class="form-section" id="quote-form">
         <div class="form-card">
             <div class="form-header">
-                <h2>Get Your Flat Quote in 60 Seconds</h2>
-                <p>Answer 3 questions. We text you a price within 15 minutes. No sales calls.</p>
+                <h2>Get Your Flat Quote</h2>
+                <p>Tell us how to reach you and we'll text a flat quote within 15 minutes. No sales calls.</p>
             </div>
 
-            <div class="progress" id="progress">
-                <div class="progress-dot done"></div>
-                <div class="progress-dot"></div>
-                <div class="progress-dot"></div>
-                <div class="progress-dot"></div>
-                <div class="progress-dot"></div>
-            </div>
+            <a href="sms:+15128773275?&body=Hi!%20I'd%20like%20a%20flat%20quote%20to%20clean%20out%20my%20garage." class="btn" style="display:block;text-align:center;margin-bottom:0.6rem;">Text us a few photos &rarr; (512) 877-3275</a>
+            <div style="text-align:center;color:var(--gray-700);font-size:0.85rem;margin-bottom:1rem;">or fill this out below</div>
 
             <form id="quote-form-el" novalidate>
 
                 <div class="step active" data-step="1">
-                    <div class="question">What do you need done?</div>
-                    <div class="options" data-field="garage_type">
-                        <button type="button" class="option" data-value="2-car cleanout">Full 2-car garage cleanout</button>
-                        <button type="button" class="option" data-value="3-car cleanout">Full 3-car garage cleanout</button>
-                        <button type="button" class="option" data-value="larger cleanout">Larger garage (4+ cars or oversized)</button>
-                        <button type="button" class="option" data-value="other">Something else</button>
-                    </div>
-                </div>
-
-                <div class="step" data-step="2">
-                    <div class="question">How would you describe your garage right now?</div>
-                    <div class="options" data-field="garage_state">
-                        <button type="button" class="option" data-value="mostly junk">Mostly junk and trash</button>
-                        <button type="button" class="option" data-value="mix">Mix of keep and toss</button>
-                        <button type="button" class="option" data-value="organizing">Needs organizing, not much junk</button>
-                        <button type="button" class="option" data-value="packed">Packed floor to ceiling</button>
-                    </div>
-                </div>
-
-                <div class="step" data-step="3">
-                    <div class="question">When do you want this done?</div>
-                    <div class="options" data-field="timeline">
-                        <button type="button" class="option" data-value="this week">This week</button>
-                        <button type="button" class="option" data-value="next 2 weeks">Next 2 weeks</button>
-                        <button type="button" class="option" data-value="this month">This month</button>
-                        <button type="button" class="option" data-value="just pricing">Just getting a price</button>
-                    </div>
-                </div>
-
-                <div class="step" data-step="4">
-                    <div class="question">What's your zip code?</div>
-                    <input type="text" class="text-input" id="zip" name="zip" placeholder="e.g. 78739" inputmode="numeric" maxlength="5" autocomplete="postal-code">
-                    <button type="button" class="btn" id="zip-next">Continue</button>
-                </div>
-
-                <div class="step" data-step="5">
-                    <div class="question">Where should we send your quote?</div>
                     <input type="text" class="text-input" id="first_name" name="first_name" placeholder="First name" autocomplete="given-name">
                     <input type="tel" class="text-input" id="phone" name="phone" placeholder="Phone number" autocomplete="tel">
+                    <select class="text-input" id="garage_state" name="garage_state">
+                        <option value="">What's the garage like? (optional)</option>
+                        <option value="packed">Packed full, hard to walk through</option>
+                        <option value="mix">Mix of keep and toss</option>
+                        <option value="light">Just a few things to haul off</option>
+                    </select>
                     <input type="email" class="text-input" id="email" name="email" placeholder="Email (optional)" autocomplete="email">
                     <div class="sms-consent-wrapper">
                         <label class="sms-consent-label" id="sms-consent-label">
                             <input type="checkbox" class="sms-consent-checkbox" id="sms_consent" name="sms_consent">
                             <span class="sms-consent-text">I agree to receive text messages from Get Your Garage Back LLC about my quote and service updates. Message frequency varies. Msg &amp; data rates may apply. Reply STOP to unsubscribe, HELP for help. <a href="/privacy.html">Privacy Policy</a> &amp; <a href="/terms-of-service.html">Terms of Service</a>.</span>
                         </label>
-                        <p class="sms-consent-note">Consent is not required to receive a quote. You can also call us at <a href="tel:+15128773275">(512) 877-3275</a>.</p>
+                        <p class="sms-consent-note">Consent is not required to receive a quote. You can also text or call us at <a href="tel:+15128773275">(512) 877-3275</a>.</p>
                     </div>
                     <button type="submit" class="btn" id="submit-btn">Get My Flat Quote</button>
                 </div>
@@ -1358,18 +1322,6 @@
             });
         });
 
-        // ======= ZIP STEP =======
-        document.getElementById('zip-next').addEventListener('click', function() {
-            var zip = document.getElementById('zip').value.trim();
-            if (!/^\d{5}$/.test(zip)) {
-                document.getElementById('zip').focus();
-                document.getElementById('zip').style.borderColor = '#c92a2a';
-                return;
-            }
-            formState.zip = zip;
-            goToStep(5);
-        });
-
         // ======= SUBMIT HANDLER =======
         document.getElementById('quote-form-el').addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -1377,6 +1329,7 @@
             formState.first_name = document.getElementById('first_name').value.trim();
             formState.phone = document.getElementById('phone').value.trim();
             formState.email = document.getElementById('email').value.trim();
+            formState.garage_state = document.getElementById('garage_state').value;
             formState.sms_consent = document.getElementById('sms_consent').checked;
 
             if (!formState.first_name || !formState.phone) {
