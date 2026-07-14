@@ -635,6 +635,13 @@
             color: var(--gray-700);
             font-style: italic;
         }
+        .pair-caption {
+            grid-column: 1 / -1;
+            text-align: center;
+            font-size: 0.88rem;
+            color: var(--gray-700);
+            margin: -0.5rem 0 0.75rem;
+        }
 
         @media (max-width: 768px) {
             .gallery-grid { grid-template-columns: 1fr; }
@@ -685,6 +692,30 @@
             font-size: 0.85rem;
             font-weight: 700;
             color: var(--gray-900);
+        }
+        .review-card.featured {
+            grid-column: 1 / -1;
+            border: 2px solid var(--green);
+            background: #f6fbf7;
+        }
+        .review-card.featured .review-text {
+            font-size: 1.08rem;
+        }
+        .review-note {
+            font-size: 0.8rem;
+            color: var(--gray-700);
+            margin-top: 0.35rem;
+        }
+        .review-text mark {
+            background: #ffe9a8;
+            padding: 0 0.15em;
+            border-radius: 3px;
+            font-style: italic;
+        }
+        .reviews-cta {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.95rem;
         }
 
         @media (max-width: 768px) {
@@ -907,7 +938,7 @@
     <section class="hero">
         <h1>Get Your Garage Back in One Day</h1>
         <p class="subhead">Flat-rate garage cleanouts for South Austin homeowners. We sort, haul, and clean your garage floor in one day. Spotless by dinner or you don't pay.</p>
-        <div class="trust-bar">&#9733; 5.0 on Google &nbsp;&middot;&nbsp; Flat-Rate Pricing &nbsp;&middot;&nbsp; Done in One Day Guarantee</div>
+        <div class="trust-bar">&#9733; 5.0 on Google (14 reviews) &nbsp;&middot;&nbsp; Flat-Rate Pricing &nbsp;&middot;&nbsp; Done in One Day Guarantee</div>
         <img src="hero-before-after-real.png" alt="Real before and after garage cleanout in South Austin: a packed garage cleared to a clean, organized space in one day" loading="eager">
     </section>
 
@@ -1024,7 +1055,42 @@
                     <span class="gallery-label">After</span>
                 </div>
 
-                <!-- Transformation 2: Workshop mess → organized space -->
+                <p class="pair-caption">Four garage bays packed to the brim &mdash; from no room for one car to space for three.</p>
+
+                <!-- Transformation 2: Single-car garage → car parked inside -->
+                <div class="gallery-pair">
+                    <img src="bmw-before.webp" alt="Single-car garage in South Austin stacked with boxes and luggage before cleanout" loading="lazy">
+                    <span class="gallery-label">Before</span>
+                </div>
+                <div class="gallery-pair">
+                    <img src="bmw-after.webp" alt="Car parked inside a clean, organized single-car garage after professional cleanout" loading="lazy">
+                    <span class="gallery-label">After</span>
+                </div>
+                <p class="pair-caption">Single-car garage &mdash; boxes out, everything on shelves, and the car sleeps inside again.</p>
+
+                <!-- Transformation 3: 40-ft Driftwood barn -->
+                <div class="gallery-pair">
+                    <img src="barn-before.webp" alt="40-foot barn near Driftwood Texas filled floor to ceiling with 20 years of accumulated items before cleanout" loading="lazy">
+                    <span class="gallery-label">Before</span>
+                </div>
+                <div class="gallery-pair">
+                    <img src="barn-after.webp" alt="Barn workshop with swept clear floor and organized shelving after a one-day cleanout" loading="lazy">
+                    <span class="gallery-label">After</span>
+                </div>
+                <p class="pair-caption">A 40-foot Driftwood barn with 20 years of accumulation &mdash; cleared in one power day.</p>
+
+                <!-- Transformation 4: Two-car garage -->
+                <div class="gallery-pair">
+                    <img src="kight-before.webp" alt="Two-car garage floor packed with tool chests, boxes, and equipment before cleanout" loading="lazy">
+                    <span class="gallery-label">Before</span>
+                </div>
+                <div class="gallery-pair">
+                    <img src="kight-after.webp" alt="Two-car garage in Austin with clear floor and organized shelves after cleanout" loading="lazy">
+                    <span class="gallery-label">After</span>
+                </div>
+                <p class="pair-caption">Two-car garage &mdash; from packed floor to parking space.</p>
+
+                <!-- Transformation 5: Renovation debris haul -->
                 <div class="gallery-pair">
                     <img src="g1-before.webp" alt="Garage filled with wood debris and clutter before cleanout" loading="lazy">
                     <span class="gallery-label">Before</span>
@@ -1033,16 +1099,7 @@
                     <img src="g2-after.webp" alt="Clean organized garage with shelving and bicycle after cleanout" loading="lazy">
                     <span class="gallery-label">After</span>
                 </div>
-
-                <!-- Transformation 3: Overstuffed → clean with organized shelves -->
-                <div class="gallery-pair">
-                    <img src="h3-before.webp" alt="Overstuffed garage with boxes, toys, and equipment before cleanout" loading="lazy">
-                    <span class="gallery-label">Before</span>
-                </div>
-                <div class="gallery-pair">
-                    <img src="h7-after.webp" alt="Clean garage with organized shelving and equipment neatly stored after cleanout" loading="lazy">
-                    <span class="gallery-label">After</span>
-                </div>
+                <p class="pair-caption">Renovation debris hauled off &mdash; garage handed back clean.</p>
 
                 <!-- Action: Crew with loaded dump trailer -->
                 <div class="gallery-pair gallery-full">
@@ -1062,9 +1119,16 @@
             <h2 class="section-heading">What Our Customers Say</h2>
             <div class="reviews-badge">
                 <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                <div class="badge-text">5.0 Rated on Google</div>
+                <div class="badge-text">5.0 on Google &middot; 14 Five-Star Reviews</div>
             </div>
             <div class="reviews-grid">
+
+                <div class="review-card featured">
+                    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="review-text">"<mark>20 years of junk stacked everywhere</mark>... they go <mark>above and beyond</mark>... will absolutely use them again and <mark>refer to anyone that I can</mark>."</p>
+                    <div class="review-author">&mdash; Rebecca W., 40-ft barn cleanout near Driftwood</div>
+                    <p class="review-note">Posted to Google the same day as her cleanout &mdash; July 2026. That's her barn in the gallery above.</p>
+                </div>
 
                 <div class="review-card">
                     <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
@@ -1102,7 +1166,20 @@
                     <div class="review-author">&mdash; Millie Smith</div>
                 </div>
 
+                <div class="review-card">
+                    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="review-text">"What a difference a day makes! Jordan and Eliot showed up right on time and spent their day hauling and organizing 19 years of accumulation &mdash; from starting a nonprofit out of our garage, to boxes of memorabilia from four kids, to old paint cans and a broken fridge. They wrapped up right on time and loaded and hauled off a dumpster full, leaving us with our garage looking as good as new. Plus they were an absolute pleasure to work with. 10/10 experience overall. Highly recommend!"</p>
+                    <div class="review-author">&mdash; Verified Google Review</div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="review-text">"Jordan and team are nothing short of a miracle. We had so much stuff we've drug around for years 'planning to do something with it one day' and it was all just such a heavy weight. The most helpful and freeing part was how they managed to responsibly take our things to their rightful 'next homes' &mdash; thrift store, dump, hazardous waste, or a future mega garage sale. I kept what I wanted and they dealt with the rest, and I feel good knowing it's being handled sustainably and responsibly. FREEDOM!!!"</p>
+                    <div class="review-author">&mdash; Verified Google Review</div>
+                </div>
+
             </div>
+            <p class="reviews-cta"><a href="https://www.google.com/maps/place/Get+Your+Garage+Back/@30.224323,-97.8497811,17z/data=!4m6!3m5!1s0x47065584edae5207:0x5d7a00b2938a8707!8m2!3d30.224323!4d-97.8497811!16s%2Fg%2F11z73qhgvf" target="_blank" rel="noopener">Read all 14 five-star reviews on Google &rarr;</a></p>
         </section>
     </div>
 
