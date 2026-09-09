@@ -15,6 +15,15 @@
     <meta property="og:url" content="https://getyourgarageback.co/estate-cleanouts.html">
     <meta property="og:image" content="https://getyourgarageback.co/j4-crew-trailer.webp">
 
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18441165474"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'AW-18441165474');
+    </script>
+
     <!-- Meta Pixel Code -->
     <script>
     !function(f,b,e,v,n,t,s)
@@ -1190,11 +1199,19 @@
                 } catch (err) { console.warn('Formspree post failed:', err); }
 
                 if (typeof fbq === 'function') { fbq('track', 'Lead', { content_name: 'estate_cleanout' }); }
+                if (typeof gtag === 'function') { gtag('event', 'conversion', { 'send_to': 'AW-18441165474/LQOxCJyMwPIcEKK1t9lE' }); }
 
                 document.getElementById('step-1').classList.remove('active');
                 document.getElementById('step-success').classList.add('active');
             });
 
+            // Google Ads: click-to-call / click-to-text conversions (tel: and sms: links anywhere on the page)
+            document.addEventListener('click', function (ev) {
+                var a = ev.target && ev.target.closest ? ev.target.closest('a[href^="tel:"], a[href^="sms:"]') : null;
+                if (!a || typeof gtag !== 'function') return;
+                var isCall = a.getAttribute('href').indexOf('tel:') === 0;
+                gtag('event', 'conversion', { 'send_to': 'AW-18441165474/' + (isCall ? 'H6wlCJ-MwPIcEKK1t9lE' : 'EPrbCKKMwPIcEKK1t9lE') });
+            }, true);
             window.addEventListener('scroll', function () {
                 var nav = document.getElementById('site-nav');
                 if (window.scrollY > 10) { nav.classList.add('scrolled'); } else { nav.classList.remove('scrolled'); }

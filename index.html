@@ -19,6 +19,15 @@
     <meta property="og:url" content="https://getyourgarageback.co/">
     <meta property="og:image" content="https://getyourgarageback.co/hero-before-after-real.png">
 
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18441165474"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'AW-18441165474');
+    </script>
+
     <!-- Meta Pixel Code -->
     <script>
     !function(f,b,e,v,n,t,s)
@@ -1452,6 +1461,7 @@
             // Fire Meta Pixel Lead event
             if (typeof fbq === 'function') {
                 fbq('track', 'Lead');
+                if (typeof gtag === 'function') { gtag('event', 'conversion', { 'send_to': 'AW-18441165474/LQOxCJyMwPIcEKK1t9lE' }); }
             }
 
             currentStep = 'success';
@@ -1459,6 +1469,13 @@
         });
 
         // ======= NAV: SCROLL SHADOW =======
+            // Google Ads: click-to-call / click-to-text conversions (tel: and sms: links anywhere on the page)
+            document.addEventListener('click', function (ev) {
+                var a = ev.target && ev.target.closest ? ev.target.closest('a[href^="tel:"], a[href^="sms:"]') : null;
+                if (!a || typeof gtag !== 'function') return;
+                var isCall = a.getAttribute('href').indexOf('tel:') === 0;
+                gtag('event', 'conversion', { 'send_to': 'AW-18441165474/' + (isCall ? 'H6wlCJ-MwPIcEKK1t9lE' : 'EPrbCKKMwPIcEKK1t9lE') });
+            }, true);
         window.addEventListener('scroll', function() {
             var nav = document.getElementById('site-nav');
             if (window.scrollY > 10) {
