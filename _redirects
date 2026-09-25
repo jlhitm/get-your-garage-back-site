@@ -1,2 +1,7 @@
 /estate-cleanouts   /estate-cleanouts.html   200
 /garage-cleanout-austin   /garage-cleanout-austin.html   200
+# GetTheHouseCleared.com (the estate line's printed domain) lands on the estate page once its DNS points at this Netlify site
+https://getthehousecleared.com/*      https://getyourgarageback.co/estate-cleanouts  301!
+https://www.getthehousecleared.com/*  https://getyourgarageback.co/estate-cleanouts  301!
+http://getthehousecleared.com/*       https://getyourgarageback.co/estate-cleanouts  301!
+http://www.getthehousecleared.com/*   https://getyourgarageback.co/estate-cleanouts  301!
