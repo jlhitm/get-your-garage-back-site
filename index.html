@@ -19,6 +19,9 @@
     <meta property="og:url" content="https://getyourgarageback.co/">
     <meta property="og:image" content="https://getyourgarageback.co/slatwall-2car-after.webp">
 
+    <!-- OpenAI Ads Measurement Pixel (ChatGPT Ads), pixel "My first pixel", installed Sep 26 2026 -->
+    <script>!function(w,d,s,u){if(w.oaiq)return;var q=function(){q.q.push(arguments)};q.q=[];w.oaiq=q;var j=d.createElement(s);j.async=1;j.src=u;var f=d.getElementsByTagName(s)[0];f.parentNode.insertBefore(j,f)}(window,document,"script","https://bzrcdn.openai.com/sdk/oaiq.min.js");oaiq("init",{pixelId:"Besc4szzqWCzv6dWp73V4w"});oaiq("measure","page_viewed",{type:"contents"});</script>
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18441165474"></script>
     <script>
@@ -1471,6 +1474,9 @@
             } catch (err) {
                 console.warn('Formspree post failed:', err);
             }
+
+            // OpenAI pixel (ChatGPT Ads): lead_created
+            if (typeof oaiq === 'function') { oaiq('measure', 'lead_created', { type: 'customer_action' }); }
 
             // Fire Meta Pixel Lead event
             if (typeof fbq === 'function') {
