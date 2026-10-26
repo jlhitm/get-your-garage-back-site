@@ -65,7 +65,7 @@
       "@context": "https://schema.org",
       "@type": "FAQPage",
       "mainEntity": [
-        {"@type": "Question", "name": "How much does a garage cleanout cost in Austin?", "acceptedAnswer": {"@type": "Answer", "text": "Most garages land between $550 and $750. Packed garages usually run $750 to $1,350. Bigger garages, and jobs where most things stay and get organized, take more time, so we price those from your photos. Text 2 photos and Jordan sends one flat price. Disposal is included and nothing is due until we finish."}},
+        {"@type": "Question", "name": "How much does a garage cleanout cost in Austin?", "acceptedAnswer": {"@type": "Answer", "text": "Most garages land between $549 and $1,299, depending on size, how full it is and how much stays. Bigger garages, and jobs where most things stay and get organized, take more time, so we price those from your photos. Text 2 photos and Jordan sends one flat price. Disposal is included and nothing is due until we finish."}},
         {"@type": "Question", "name": "Is the planner range my final price?", "acceptedAnswer": {"@type": "Answer", "text": "No. The planner shows what garages like yours usually cost. Your flat price comes from your photos, and you have it before we start."}},
         {"@type": "Question", "name": "What is included in a garage cleanout?", "acceptedAnswer": {"@type": "Answer", "text": "The crew, loading and hauling, dump fees, donation drop-offs, sorting with you into keep, donate and toss, and a swept floor. If you want what stays organized, tell us and it is built into your flat price. Shelving and overhead racks are an add-on."}},
         {"@type": "Question", "name": "Can you take paint, chemicals or other hazardous items?", "acceptedAnswer": {"@type": "Answer", "text": "Some of it needs special handling. Show it in your photos and we will tell you what we can take."}}
@@ -435,7 +435,7 @@
             </div>
             <noscript>
                 <div class="panel" style="margin-top:1rem;">
-                    <p style="font-weight:700;margin-bottom:0.6rem;">Most garages land between $550 and $750. Packed garages usually run $750 to $1,350. Text 2 photos for your flat price.</p>
+                    <p style="font-weight:700;margin-bottom:0.6rem;">Most garages land between $549 and $1,299, depending on size, how full it is and how much stays. Text 2 photos for your flat price.</p>
                     <a href="sms:+15128773275?&body=GARAGE%20-%20Hi%20Jordan%2C%20here%20are%202%20photos%20of%20my%20garage." class="btn">Text 2 photos to (512) 877-3275</a>
                 </div>
             </noscript>
@@ -487,7 +487,7 @@
             <div class="faq-list">
                 <div class="faq-item">
                     <button class="faq-question" type="button" aria-expanded="false"><span>How much does a garage cleanout cost in Austin?</span><span class="faq-chevron" aria-hidden="true">&#9662;</span></button>
-                    <div class="faq-answer">Most garages land between $550 and $750. Packed garages usually run $750 to $1,350. Bigger garages, and jobs where most things stay and get organized, take more time, so we price those from your photos. Text 2 photos and Jordan sends one flat price. Disposal is included and nothing is due until we finish.</div>
+                    <div class="faq-answer">Most garages land between $549 and $1,299, depending on size, how full it is and how much stays. Bigger garages, and jobs where most things stay and get organized, take more time, so we price those from your photos. Text 2 photos and Jordan sends one flat price. Disposal is included and nothing is due until we finish.</div>
                 </div>
                 <div class="faq-item">
                     <button class="faq-question" type="button" aria-expanded="false"><span>Is the planner range my final price?</span><span class="faq-chevron" aria-hidden="true">&#9662;</span></button>
@@ -566,7 +566,10 @@
 
         // ================= Planner state + pricing ranges =================
         // RANGES ONLY. Firm GYGB prices go through the human quote gate.
-        // Bands match the live engine (gygb-pricing.js): standard 550-750, packed 750-1350.
+        // Oct 26 2026 (Jordan: "think it through, make the best decision, ship it"): bands are wide on purpose so
+        // the flat quote lands INSIDE the range shown (quoting above a range invites "is this firm?"), and they
+        // match the site-wide $549-$1,299. Keep-and-organize jobs are priced on labor (Kelsey/Anderson Mill lesson),
+        // so they get their own higher floor. Packed + keep-and-organize and big 3-car jobs show no number at all.
         // Anything the bands do not cover returns null, which shows "we'll price it from your photos".
         var state = { size: null, fill: null, keep: null, after: null, special: [] };
         var LABELS = {
@@ -585,17 +588,21 @@
         };
         // garage_state text for the lead pipeline. The engine keys on the word "packed".
         var GARAGE_STATE = { little: 'A little, you can still walk around', cluttered: 'Cluttered, a car will not fit', packed: 'Packed to the door' };
-        var BAND_STD = { lo: 550, hi: 750 }, BAND_PACKED = { lo: 750, hi: 1350 };
+        var BAND_STD = { lo: 549, hi: 849 }, BAND_PACKED = { lo: 749, hi: 1299 }, BAND_ORGANIZE = { lo: 849, hi: 1299 };
 
         function rangeFor(s) {
             var organize = s.after === 'organized' || s.after === 'shelving';
+            var keepAndOrganize = organize && s.keep === 'keep';
             if (s.size === '3car') {
                 if (s.fill === 'packed') return null;
                 if (s.fill === 'cluttered') return organize ? null : BAND_PACKED;
-                return BAND_STD;
+                return keepAndOrganize ? BAND_ORGANIZE : BAND_STD;
             }
-            if (s.fill === 'packed') return BAND_PACKED;
-            if (s.fill === 'cluttered' && s.size === '2car' && s.keep === 'toss') return BAND_PACKED;
+            if (s.fill === 'packed') return keepAndOrganize ? null : BAND_PACKED;
+            if (s.fill === 'cluttered') {
+                if (keepAndOrganize) return BAND_ORGANIZE;
+                if (s.size === '2car' && s.keep === 'toss') return BAND_PACKED;
+            }
             return BAND_STD;
         }
         function money(n) { return '$' + n.toLocaleString('en-US'); }
